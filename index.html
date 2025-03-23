@@ -1,3 +1,40 @@
+<?php
+$nama = $email = $nomor = $mobil = $alamat = "";
+$namaErr = $emailErr = $nomorErr = $alamatErr = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["nama"])) {
+        $namaErr = "Nama wajib diisi";
+    } else {
+        $nama = htmlspecialchars($_POST["nama"]);
+    }
+
+    if (empty($_POST["email"])) {
+        $emailErr = "Email wajib diisi";
+    } elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+        $emailErr = "Format email tidak valid";
+    } else {
+        $email = htmlspecialchars($_POST["email"]);
+    }
+
+    if (empty($_POST["nomor"])) {
+        $nomorErr = "Nomor Telepon wajib diisi";
+    } elseif (!ctype_digit($_POST["nomor"])) {
+        $nomorErr = "Nomor Telepon harus berupa angka";
+    } else {
+        $nomor = htmlspecialchars($_POST["nomor"]);
+    }
+
+    if (empty($_POST["alamat"])) {
+        $alamatErr = "Alamat wajib diisi";
+    } else {
+        $alamat = htmlspecialchars($_POST["alamat"]);
+    }
+
+    $mobil = $_POST["mobil"];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
